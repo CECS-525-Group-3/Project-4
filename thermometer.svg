@@ -1,0 +1,44 @@
+<?xml version="1.0"?><svg width="256" height="512" xmlns="http://www.w3.org/2000/svg">
+ <title>thermometer blank</title>
+
+ <metadata id="metadata7">image/svg+xmlThermometer2006-11-06Trent Buck &lt;twb@cyber.com.au&gt;</metadata>
+ <g>
+  <title>Layer 1</title>
+  <g id="layer1">
+   <g id="g3030">
+    <g id="g2984">
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2931" d="m82.121849,62l50.121849,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2935" d="m82.121849,382l50.121849,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2937" d="m82.121849,222l50.121849,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2939" d="m82.121849,190l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2941" d="m82.121849,158l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2943" d="m82.121849,126l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2945" d="m82.121849,94l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2947" d="m82.121849,254l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2949" d="m82.121849,286l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2951" d="m82.121849,318l16.707283,0"/>
+     <path fill="#fcf9f9" fill-opacity="0.75" fill-rule="evenodd" stroke="black" stroke-width="4" stroke-miterlimit="4" id="path2953" d="m82.121849,350l16.707283,0"/>
+    </g>
+    <g id="g3023">
+     <rect fill="#fcf9f9" fill-rule="nonzero" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" ry="16" rx="16" y="30" x="48.707283" height="416" width="33.414566" id="rect2922"/>
+     <rect fill="#fcf9f9" fill-rule="nonzero" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" y="382" x="48.707283" height="64" width="33.414558" id="rect3021"/>
+     <path fill="#fcf9f9" fill-rule="nonzero" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" d="m98.829132,446a33.414566,32 0 1 1 -66.829132,0a33.414566,32 0 1 1 66.829132,0z" id="path2924"/>
+     <!-- set the height attribute to something between 0 and 10.  Can be floating-point. -->
+     <rect fill="#fcf9f9" fill-rule="nonzero" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" id="mercury" transform="translate(0 -2) scale(1 1) scale(1 32)" width="33.414566" height="10" x="-82.121849" y="-12"/>
+     <path fill="#fcf9f9" fill-rule="nonzero" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" id="rect2968" d="m65.414566,30c-9.255833,0 -16.707283,7.136002 -16.707283,16l0,372.28125c-9.987114,5.535095 -16.707283,15.880676 -16.707283,27.71875c0,17.664001 14.969723,32 33.414566,32c18.444839,0 33.414566,-14.335999 33.414566,-32c0,-11.838074 -6.720169,-22.183655 -16.707283,-27.71875l0,-372.28125c0,-8.863998 -7.451447,-16 -16.707283,-16z"/>
+    </g>
+    <text font-size="20.000006px" font-style="normal" font-weight="normal" text-anchor="start" fill="#fcf9f9" stroke-width="1px" font-family="Bitstream Vera Sans" xml:space="preserve" x="136.21846" y="383.38419" id="low" transform="matrix(1.04253 0 0 1.00161 -1.41457 -2)">
+     <tspan fill="#fcf9f9" id="tspan3003" x="136.21846" y="383.38419">Foo</tspan>
+    </text>
+    <text transform="matrix(1.04421 0 0 1 -1.41457 0)" font-size="20px" font-style="normal" font-weight="normal" text-anchor="start" fill="#fcf9f9" stroke-width="1px" font-family="Bitstream Vera Sans" xml:space="preserve" x="136" y="222" id="middle">
+     <tspan fill="#fcf9f9" id="tspan3011" x="136" y="224">Bar</tspan>
+    </text>
+    <text transform="matrix(1.04421 0 0 1 -1.41457 0)" font-size="20px" font-style="normal" font-weight="normal" text-anchor="start" fill="#fcf9f9" stroke-width="1px" font-family="Bitstream Vera Sans" xml:space="preserve" x="135.32617" y="61.830078" id="high">
+     <tspan fill="#fcf9f9" id="tspan3007" x="135.32617" y="63.830078">Baz</tspan>
+    </text>
+   </g>
+  </g>
+  <text transform="rotate(-0.000146047 188.998 214.499) matrix(6.31169 0 0 0.394647 -808.247 123.338)" xml:space="preserve" text-anchor="middle" font-family="Arial" font-size="24" id="svg_1" y="239" x="158" stroke-width="0" stroke="#000000" fill="#000000"/>
+  <text transform="matrix(8.21429 0 0 1 -1673.71 0)" xml:space="preserve" text-anchor="middle" font-family="Arial" font-size="0.001" id="svg_3" y="186" x="225" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">5000</text>
+ </g>
+</svg>

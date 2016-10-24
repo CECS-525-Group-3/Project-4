@@ -1,0 +1,9 @@
+-L "nc30lib"
+-G
+-MS
+-O "C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug\renesasPt4.x30"
+"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug\ncrt0.r30"
+"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug\Interrupts.r30"
+"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug\LCD.r30"
+"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug\MCUInit.r30"
+"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug\QSK62P.r30"

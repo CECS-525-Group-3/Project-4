@@ -1,0 +1,7 @@
+-I"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4"
+-I"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4"
+-I"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\..\Common"
+-c
+-finfo
+-dir "C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\Debug"
+"C:\Users\Student\Documents\team7\MicroLabs\microLab2\renesasPt4\renesasPt4\MCUInit.c"
