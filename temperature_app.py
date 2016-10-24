@@ -2,7 +2,8 @@ import random
 import tkinter as tk
 import subprocess
 
-from PIL import Image, ImageTk
+import serial
+import pygame
 
 class Temperature(object):
     def __init__(self):
@@ -10,7 +11,7 @@ class Temperature(object):
         self._observers = []
 
     def get_temperature(self):
-        return _temperature_value
+        return self._temperature_value
 
     def set_temperature(self, temperature):
         self._temperature_value = temperature
@@ -25,10 +26,9 @@ class TemperatureFrame(tk.Frame):
         super().__init__(master)
         self._create_text()
         temperature.bind_to(self._update_temperature)
-        temperature.bind_to(self._play_sound)
 
     def _create_text(self):
-        self.temperature_label = tk.Label(self.master, text=u'0\u2109', font=('Arial', 300))
+        self.temperature_label = tk.Label(self.master, text=u'0\u2109', font=('Arial', 200))
         self.temperature_label.pack(side=tk.RIGHT)
 
     def _update_temperature(self, temperature):
@@ -41,8 +41,9 @@ class TemperatureFrame(tk.Frame):
 
     def _play_sound(self, temperature):
         if(temperature >= 80):
-            subprocess.call(['afplay', 'leeroy_jenkins.mp3'])
-
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy() == True:
+                continue
 
 class ThermometerFrame(tk.Frame):
     def __init__(self, temperature, master=None):
@@ -57,7 +58,9 @@ class ThermometerFrame(tk.Frame):
     
     def draw_mercury(self, temperature):
         self.canvas.delete('line')
-        draw_height = 530 - temperature * 5
+        draw_height = 530 - temperature * 4
+        if draw_height <= 80:
+            draw_height = 80
         self.canvas.create_line(200, 530, 200, draw_height, width=35, fill='red', tag='line') 
 
 
@@ -79,11 +82,19 @@ if __name__ == '__main__':
     root = tk.Tk()
     root.wm_title('Temperature Display')
     root.geometry('800x600')
+    pygame.mixer.init()
+    pygame.mixer.music.load('blip.mp3')
+    ser = serial.Serial('/dev/ttyAMA0', 9600)
 
     temperature = Temperature()
     app = Application(temperature, master=root)
     
     while True:
-        root.after(2000, temperature.set_temperature(round(random.random() * 100, 2)))
+        data = ser.readline()
+        temperature.set_temperature(float(data))
         root.update_idletasks()
         root.update()
+        if(temperature.get_temperature() >= 80):
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy() == True:
+                continue
