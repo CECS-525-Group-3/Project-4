@@ -1,4 +1,4 @@
-import random
+import random, re
 import tkinter as tk
 
 # import serial
@@ -94,7 +94,15 @@ if __name__ == '__main__':
     app = Application(temperature, master=root)
     
     while True:
-        # data = ser.readline()
+        data = str(ser.readline(), 'utf-8')
+        print(data)
+        if re.match(r'RBUT', data):
+            print('RIGHT BUTTON PRESSED')
+        elif re.match(r'LBUT', data):
+            print('LEFT BUTTON PRESSED')
+        elif re.match(r'CBUT', data):
+            print('CENTER BUTTON PRESSED')
+
         # temperature.set_temperature(float(data))
         root.after(1000, temperature.set_temperature(random.randrange(0, 100)))
         root.update_idletasks()
