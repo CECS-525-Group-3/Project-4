@@ -62,8 +62,8 @@ class TimeFrame(tk.Frame):
         self._create_text()
 
     def _create_text(self):
-        self.time_label = tk.Label(self.master, text='00:00:00', font=('Arial', 100))
-        self.time_label.pack(side=tk.RIGHT)
+        self.time_label = tk.Label(self.master, text='00:00:00', font=('Arial', 50))
+        self.time_label.pack(side=tk.BOTTOM)
 
 class Application(tk.Frame):
     def __init__(self, temperature, master=None):
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     root = tk.Tk()
     root.wm_title('Temperature Display')
-    root.geometry('800x600')
+    root.geometry('1100x700')
     # pygame.mixer.init()
     # pygame.mixer.music.load('blip.mp3')
     # ser = serial.Serial('/dev/ttyAMA0', 9600)
