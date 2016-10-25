@@ -98,7 +98,7 @@ class Application(tk.Frame):
 
     def init_frames(self, temperature, time):
         self.temperature_frame = TemperatureFrame(temperature, self)
-        self.temperature_frame.pack(side=tk.RIGHT, fill=tk.BOTH)
+        self.temperature_frame.pack(side=tk.RIGHT)
 
         self.themometer_frame = ThermometerFrame(temperature, self)
         self.themometer_frame.pack(side=tk.LEFT)
