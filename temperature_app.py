@@ -1,9 +1,8 @@
 import random
 import tkinter as tk
-import subprocess
 
-import serial
-import pygame
+# import serial
+# import pygame
 
 class Temperature(object):
     def __init__(self):
@@ -39,16 +38,10 @@ class TemperatureFrame(tk.Frame):
         else:
             self.temperature_label['fg'] = 'black'
 
-    def _play_sound(self, temperature):
-        if(temperature >= 80):
-            pygame.mixer.music.play()
-            while pygame.mixer.music.get_busy() == True:
-                continue
-
 class ThermometerFrame(tk.Frame):
     def __init__(self, temperature, master=None):
         super().__init__(master)
-        self.canvas = tk.Canvas(self, width=800, height=800)
+        self.canvas = tk.Canvas(self, width=300, height=800)
         self.canvas.pack(side=tk.LEFT)
 
         self.photo = tk.PhotoImage(file="thermometer.gif")
@@ -63,6 +56,14 @@ class ThermometerFrame(tk.Frame):
             draw_height = 80
         self.canvas.create_line(200, 530, 200, draw_height, width=35, fill='red', tag='line') 
 
+class TimeFrame(tk.Frame):
+    def __init__(self, hours, minutes, seconds, master=None):
+        super().__init__(master)
+        self._create_text()
+
+    def _create_text(self):
+        self.time_label = tk.Label(self.master, text='00:00:00', font=('Arial', 100))
+        self.time_label.pack(side=tk.RIGHT)
 
 class Application(tk.Frame):
     def __init__(self, temperature, master=None):
@@ -72,29 +73,33 @@ class Application(tk.Frame):
 
     def init_frames(self, temperature):
         self.temperature_frame = TemperatureFrame(temperature, self)
-        self.temperature_frame.pack(side=tk.RIGHT)
+        self.temperature_frame.pack(side=tk.TOP)
 
         self.themometer_frame = ThermometerFrame(temperature, self)
         self.themometer_frame.pack(side=tk.LEFT)
+
+        self.time_frame = TimeFrame(0, 0, 0, self)
+        self.time_frame.pack(side=tk.BOTTOM)
 
 if __name__ == '__main__':
 
     root = tk.Tk()
     root.wm_title('Temperature Display')
     root.geometry('800x600')
-    pygame.mixer.init()
-    pygame.mixer.music.load('blip.mp3')
-    ser = serial.Serial('/dev/ttyAMA0', 9600)
+    # pygame.mixer.init()
+    # pygame.mixer.music.load('blip.mp3')
+    # ser = serial.Serial('/dev/ttyAMA0', 9600)
 
     temperature = Temperature()
     app = Application(temperature, master=root)
     
     while True:
-        data = ser.readline()
-        temperature.set_temperature(float(data))
+        # data = ser.readline()
+        # temperature.set_temperature(float(data))
+        root.after(1000, temperature.set_temperature(random.randrange(0, 100)))
         root.update_idletasks()
         root.update()
-        if(temperature.get_temperature() >= 80):
-            pygame.mixer.music.play()
-            while pygame.mixer.music.get_busy() == True:
-                continue
+        # if(temperature.get_temperature() >= 80):
+            # pygame.mixer.music.play()
+            # while pygame.mixer.music.get_busy() == True:
+                # continue
