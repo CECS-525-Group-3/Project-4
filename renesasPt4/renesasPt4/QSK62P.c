@@ -22,7 +22,7 @@ uint A2DValuePot;
 uint A2DValueTherm;
 uint btn1 = 0; 
 uint btn2 = 0; 
-uint btn3 = 0; 
+uint btn3 = 0;
 uchar A2DProcessed;
 
 void main(void)
@@ -35,7 +35,15 @@ void main(void)
 //  Notes:          None    
 //-----------------------------------------------------------------------------------------------------
 {
-	
+	unsigned int f1 = 0;
+	unsigned int f2 = 0;
+	unsigned int f3 = 0;
+	float prevT = 0.0;
+	float B = 3960.0;
+	float r0 = 10000.0;
+	float t0 = 298.15;
+	float t = 1.0;
+	float r = 0.0;
 	MCUInit();
 	InitDisplay(" ");
 	InitUART();
@@ -43,63 +51,67 @@ void main(void)
 	ADInit();	
 	ENABLE_SWITCHES;
 	
-	
 	/* LED initialization - macro defined in qsk_bsp.h */
- 	ENABLE_LEDS	
+ 	ENABLE_LEDS;
+	pd0_0 = 1;
+	p0_0 = 1;
 
-	while(1) {
-		//LEDDisplay();		// display current value of LED control variable */
-		if(S1 == 0){ //If button 1 is pressed
-			if(btn1 == 0)//If button 1 is 0
+	while(1)
+	{			
+		// Get resist
+		r = 10000.0 * A2DValueTherm / (1024.0 - A2DValueTherm);
+					
+		// Get temperature in kelvin
+		t = B * t0 / (t0 * log(r / r0) + B);
+		
+		// Convert to C
+		t -= 273.15;
+		
+		// Convert to F
+		t = (t * (9.0/5.0)) + 32.2;
+			
+		/*if(prevT != t && t > 0)
+		{	
+			// Turn on fan
+			if(t > 80.0)
 			{
-				btn1 = 1; //set button 1 to 1
-				LED0 = LED_ON;//Turn LED 0 on
-				DisplayDelay(20);//Delays the display 20 ms
+				p0_0 = 1;
 			}
-			else 
+			else
 			{
-				btn1 = 0;//set button 1 to 0
-				LED0 = LED_OFF;//Turn LED 0 off
-				DisplayDelay(20);//Delays the display 20 ms
+				p0_0 = 0;
 			}
+			
+			BNSPrintf(SERIAL, "TEMP:%0.2f\r\n", t);
+			
+			prevT = t;
+		}*/
+		
+		// If button pressed
+		if(S1 == 0 && f1 == 0)
+		{
+			f1 = 1;
+			BNSPrintf(SERIAL, "ACTION:LBUT\r\n");
 		}
-		else if (S2 == 0){
-			if(btn2 == 0)
-			{
-				btn2 = 1;
-				LED1 = LED_ON;
-				DisplayDelay(20);//Delays the display 20 ms
-			}
-			else 
-			{
-				btn2 = 0;
-				LED1 = LED_OFF;
-				DisplayDelay(20);//Delays the display 20 ms
-			}
+		else if(S2 == 0 && f2 == 0)
+		{
+			f2 = 1;
+			BNSPrintf(SERIAL, "ACTION:CBUT\r\n");				
 		}
-		else if (S3 == 0){//If button 3 is pressed
-			if(btn3 == 0)//If LED 3 is off
-			{
-				btn3 = 1;//sets btn3 to 1
-				LED2 = LED_ON;//Turns LED 2 on
-				DisplayDelay(20);//Delays the display 20 ms
-			}
-			else //else
-			{
-				btn3 = 0;//sets btn3 to 0
-				LED2 = LED_OFF; //Turns LED 3 off
-				DisplayDelay(20);//Delays the display 20 ms
-			}
+		else if(S3 == 0 && f3 == 0)
+		{
+			f3 = 1;
+			BNSPrintf(SERIAL, "ACTION:RBUT\r\n");				
 		}
-		else{
-            if (A2DProcessed == TRUE) {         // only update the display when a new value is available
-                A2DProcessed = FALSE;
-                BNSPrintf(LCD,"B1:%uB2:%u\nB3:%u \t", btn1, btn2, btn3);
-            }
-		}
+		
+		if(S1 == 1)
+			f1 = 0;
+		if(S2 == 1)
+			f2 = 0;
+		if(S3 == 1)
+			f3 = 0;
 	}
-}
-
+}			
 
 void TimerInit(void)
 //-----------------------------------------------------------------------------------------------------
@@ -143,7 +155,6 @@ void ADInit(void)
 //  Notes:          None    
 //-----------------------------------------------------------------------------------------------------
 {
-	
    /* Configure ADC - AN0 (Analog Adjust Pot) */
    adcon0 = 0x80;	// AN0, One-shot, software trigger, fAD/2
    adcon1 = 0x28;	// 10-bit mode, Vref connected.

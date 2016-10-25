@@ -1,7 +1,7 @@
 ##########################################
 # (1) LINK INFORMATION                   #
 ##########################################
-c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\bin\ln30.exe @C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\renesasPt4.m16cl
+c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\bin\ln30.exe @C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\renesasPt4.m16cl
 
 # ID CODE DATA
 .ID  "#FFFFFFFFFFFFFF"
@@ -10,26 +10,20 @@ c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\bin\ln30.exe @C:
 .PROTECT  FFH
 
 # LINK FILE INFORMATION
-ncrt0 (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\ncrt0.r30)
-	Oct 24 15:31:23 2016
+ncrt0 (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\ncrt0.r30)
+	Oct 25 14:20:07 2016
 
-Interrupts (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\Interrupts.r30)
-	Oct 24 15:31:22 2016
+Interrupts (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\Interrupts.r30)
+	Oct 25 14:20:06 2016
 
-LCD (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\LCD.r30)
-	Oct 24 15:31:22 2016
+LCD (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\LCD.r30)
+	Oct 25 14:20:06 2016
 
-MCUInit (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\MCUInit.r30)
-	Oct 24 15:31:23 2016
+MCUInit (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\MCUInit.r30)
+	Oct 25 14:20:06 2016
 
-QSK62P (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\QSK62P.r30)
-	Oct 24 15:31:23 2016
-
-_f4eq (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib)
-	Nov  8 18:36:38 2007
-
-_f4le (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib)
-	Nov  8 18:36:38 2007
+QSK62P (C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\QSK62P.r30)
+	Oct 25 14:20:07 2016
 
 _f4tof8 (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib)
 	Nov  8 18:36:39 2007
@@ -41,9 +35,6 @@ _f8div (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc
 	Nov  8 18:36:40 2007
 
 _f8ge (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib)
-	Nov  8 18:36:40 2007
-
-_f8le (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib)
 	Nov  8 18:36:40 2007
 
 _f8ltor (c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib)
@@ -154,91 +145,87 @@ rom_NE                           ABS ROMDATA 00F000 000000       ncrt0
 rom_NO                           REL ROMDATA 00F000 000000       ncrt0
 rom_FE                           ABS ROMDATA 0F4000 000000       ncrt0
 rom_FO                           REL ROMDATA 0F4000 000000       ncrt0
-                                 REL ROMDATA 0F4000 00000D       QSK62P
-data_SEI                         REL ROMDATA 0F400E 000000 2     ncrt0
-data_SOI                         REL ROMDATA 0F400E 000000       ncrt0
-data_NEI                         REL ROMDATA 0F400E 000000 2     ncrt0
-                                 REL ROMDATA 0F400E 000006       QSK62P
-                                 REL ROMDATA 0F4014 000010       mdata
-                                 REL ROMDATA 0F4024 000002       errno
-                                 REL ROMDATA 0F4026 00000C       infinity
-data_NOI                         REL ROMDATA 0F4032 000000       ncrt0
-                                 REL ROMDATA 0F4032 000001       LCD
-program                          REL CODE    0F4034 000000 2     ncrt0
-                                 REL CODE    0F4034 0000A3 2     Interrupts
-                                 REL CODE    0F40D8 0007CC 2     LCD
-                                 REL CODE    0F48A4 00006D 2     MCUInit
-                                 REL CODE    0F4912 00032D 2     QSK62P
-                                 REL CODE    0F4C40 00005C 2     _f4eq
-                                 REL CODE    0F4C9C 000081 2     _f4le
-                                 REL CODE    0F4D1E 000086 2     _f4tof8
-                                 REL CODE    0F4DA4 00091B 2     _f8add
-                                 REL CODE    0F56C0 0002C9 2     _f8div
-                                 REL CODE    0F598A 0000A7 2     _f8ge
-                                 REL CODE    0F5A32 0000A7 2     _f8le
-                                 REL CODE    0F5ADA 000054 2     _f8ltor
-                                 REL CODE    0F5B2E 0002C7 2     _f8mul
-                                 REL CODE    0F5DF6 000028 2     _f8sub
-                                 REL CODE    0F5E1E 0000B3 2     _f8tof4
-                                 REL CODE    0F5ED2 000025 2     _f8toi4u
-                                 REL CODE    0F5EF8 000111 2     _ftol
-                                 REL CODE    0F600A 00004D 2     _i4divu
-                                 REL CODE    0F6058 00004B 2     _i4modu
-                                 REL CODE    0F60A4 00001C 2     _i4mulu
-                                 REL CODE    0F60C0 000022 2     _i4tof4
-                                 REL CODE    0F60E2 000022 2     _i4utof8
-                                 REL CODE    0F6104 0000D4 2     _ltof
-                                 REL CODE    0F61D8 000337 2     log
-                                 REL CODE    0F6510 00013B 2     _f4adds
-                                 REL CODE    0F664C 0000C4 2     _f4divs
-                                 REL CODE    0F6710 0000B0 2     _f4muls
-                                 REL CODE    0F67C0 000032 2     _f4rets
-                                 REL CODE    0F67F2 000046 2     _f4ltor
-                                 REL CODE    0F6838 00003E 2     _f4rtol
-                                 REL CODE    0F6876 00007C 2     _f8ne
-                                 REL CODE    0F68F2 000041 2     _f8rtol
-                                 REL CODE    0F6934 000022 2     _i4tof8
-                                 REL CODE    0F6956 00004D 2     frexp
-                                 REL CODE    0F69A4 000051 2     ldexp
-interrupt                        REL CODE    0F69F6 000000 2     ncrt0
-                                 REL CODE    0F69F6 0000A7       ncrt0
-program_S                        REL CODE    0F6A9E 000000 2     ncrt0
+                                 REL ROMDATA 0F4000 00002C       QSK62P
+data_SEI                         REL ROMDATA 0F402C 000000 2     ncrt0
+data_SOI                         REL ROMDATA 0F402C 000000       ncrt0
+data_NEI                         REL ROMDATA 0F402C 000000 2     ncrt0
+                                 REL ROMDATA 0F402C 000006       QSK62P
+                                 REL ROMDATA 0F4032 000010       mdata
+                                 REL ROMDATA 0F4042 000002       errno
+                                 REL ROMDATA 0F4044 00000C       infinity
+data_NOI                         REL ROMDATA 0F4050 000000       ncrt0
+                                 REL ROMDATA 0F4050 000001       LCD
+program                          REL CODE    0F4052 000000 2     ncrt0
+                                 REL CODE    0F4052 0000A3 2     Interrupts
+                                 REL CODE    0F40F6 0007CC 2     LCD
+                                 REL CODE    0F48C2 00006D 2     MCUInit
+                                 REL CODE    0F4930 000315 2     QSK62P
+                                 REL CODE    0F4C46 000086 2     _f4tof8
+                                 REL CODE    0F4CCC 00091B 2     _f8add
+                                 REL CODE    0F55E8 0002C9 2     _f8div
+                                 REL CODE    0F58B2 0000A7 2     _f8ge
+                                 REL CODE    0F595A 000054 2     _f8ltor
+                                 REL CODE    0F59AE 0002C7 2     _f8mul
+                                 REL CODE    0F5C76 000028 2     _f8sub
+                                 REL CODE    0F5C9E 0000B3 2     _f8tof4
+                                 REL CODE    0F5D52 000025 2     _f8toi4u
+                                 REL CODE    0F5D78 000111 2     _ftol
+                                 REL CODE    0F5E8A 00004D 2     _i4divu
+                                 REL CODE    0F5ED8 00004B 2     _i4modu
+                                 REL CODE    0F5F24 00001C 2     _i4mulu
+                                 REL CODE    0F5F40 000022 2     _i4tof4
+                                 REL CODE    0F5F62 000022 2     _i4utof8
+                                 REL CODE    0F5F84 0000D4 2     _ltof
+                                 REL CODE    0F6058 000337 2     log
+                                 REL CODE    0F6390 00013B 2     _f4adds
+                                 REL CODE    0F64CC 0000C4 2     _f4divs
+                                 REL CODE    0F6590 0000B0 2     _f4muls
+                                 REL CODE    0F6640 000032 2     _f4rets
+                                 REL CODE    0F6672 000046 2     _f4ltor
+                                 REL CODE    0F66B8 00003E 2     _f4rtol
+                                 REL CODE    0F66F6 00007C 2     _f8ne
+                                 REL CODE    0F6772 000041 2     _f8rtol
+                                 REL CODE    0F67B4 000022 2     _i4tof8
+                                 REL CODE    0F67D6 00004D 2     frexp
+                                 REL CODE    0F6824 000051 2     ldexp
+interrupt                        REL CODE    0F6876 000000 2     ncrt0
+                                 REL CODE    0F6876 0000A7       ncrt0
+program_S                        REL CODE    0F691E 000000 2     ncrt0
 vector                           ABS ROMDATA 0FFD00 000100       ncrt0
 fvector                          ABS ROMDATA 0FFFDC 000024       ncrt0
 # Total -------------------------------------------------------------------
                                      DATA           000936(0002358) Byte(s)
-                                     ROMDATA        000156(0000342) Byte(s)
-                                     CODE           002A68(0010856) Byte(s)
+                                     ROMDATA        000175(0000373) Byte(s)
+                                     CODE           0028CA(0010442) Byte(s)
 
 ##########################################
 # (3) GLOBAL LABEL INFORMATION           #
 ##########################################
-$BNSPutch          0f4712  $DisplayString     0f476a  $LCD_write         0f47c8
-$_f4ltor           0f67f2  $_f4rtol           0f6838  $_f8ltor           0f5ada
-$_f8rtol           0f68f2  $_ftol             0f5ef8  $_ltof             0f6104
-$exit              0f6a9a  $ldexp             0f69a4  _A2DInterrupt      0f4034
+$BNSPutch          0f4730  $DisplayString     0f4788  $LCD_write         0f47e6
+$_f4ltor           0f6672  $_f4rtol           0f66b8  $_f8ltor           0f595a
+$_f8rtol           0f6772  $_ftol             0f5d78  $_ltof             0f5f84
+$exit              0f691a  $ldexp             0f6824  _A2DInterrupt      0f4052
 _A2DProcessed      0004b5  _A2DValue          0004a6  _A2DValuePot       0004a8
-_A2DValueTherm     0004aa  _ADInit            0f4be4  _BNSPrintf         0f4162
-_DMA0Interrupt     0f4040  _DisplayDelay      0f4876  _InitDisplay       0f40d8
-_InitUART          0f48e8  _KeyBoardInterru   0f40ba  _LEDDisplay        0f4bf2
-_MCUInit           0f48a4  _RTCInterrupt      0f40c6  _TimerA1Interrup   0f4062
-_TimerA2Interrup   0f40b4  _TimerB0Interrup   0f40cc  _TimerInit         0f4bba
-_UART0ReceiveInt   0f4046  _UART0TransmitIn   0f403a  _WakeUpInterrupt   0f40c0
-_WatchDogInterru   0f40d2  ___huge_val        000498  ___huge_valf       0004a0
-__f4add            0f6540  __f4div            0f666e  __f4eq             0f4c40
-__f4le             0f4c9c  __f4mul            0f6734  __f4retInf         0f67ca
-__f4retNaN         0f67c0  __f4retNum         0f67da  __f4retZero        0f67c6
-__f4sub            0f653a  __f4tof8           0f4d1e  __f8add            0f4da4
-__f8div            0f56c0  __f8ge             0f598a  __f8le             0f5a32
-__f8mul            0f5b2e  __f8ne             0f6876  __f8sub            0f5df6
-__f8tof4           0f5e1e  __f8toi4U          0f5ed2  __i4Utof8          0f60e2
-__i4divU           0f600a  __i4modU           0f6058  __i4mulU           0f60a4
-__i4tof4           0f60c0  __i4tof8           0f6934  __memt             00048e
+_A2DValueTherm     0004aa  _ADInit            0f4bea  _BNSPrintf         0f4180
+_DMA0Interrupt     0f405e  _DisplayDelay      0f4894  _InitDisplay       0f40f6
+_InitUART          0f4906  _KeyBoardInterru   0f40d8  _LEDDisplay        0f4bf8
+_MCUInit           0f48c2  _RTCInterrupt      0f40e4  _TimerA1Interrup   0f4080
+_TimerA2Interrup   0f40d2  _TimerB0Interrup   0f40ea  _TimerInit         0f4bc0
+_UART0ReceiveInt   0f4064  _UART0TransmitIn   0f4058  _WakeUpInterrupt   0f40de
+_WatchDogInterru   0f40f0  ___huge_val        000498  ___huge_valf       0004a0
+__f4add            0f63c0  __f4div            0f64ee  __f4mul            0f65b4
+__f4retInf         0f664a  __f4retNaN         0f6640  __f4retNum         0f665a
+__f4retZero        0f6646  __f4sub            0f63ba  __f4tof8           0f4c46
+__f8add            0f4ccc  __f8div            0f55e8  __f8ge             0f58b2
+__f8mul            0f59ae  __f8ne             0f66f6  __f8sub            0f5c76
+__f8tof4           0f5c9e  __f8toi4U          0f5d52  __i4Utof8          0f5f62
+__i4divU           0f5e8a  __i4modU           0f5ed8  __i4mulU           0f5f24
+__i4tof4           0f5f40  __i4tof8           0f67b4  __memt             00048e
 __mnext            0004ac  __msize            0004b0  __pool             000486
 _btn1              000480  _btn2              000482  _btn3              000484
-_disp_count        0004a4  _errno             000496  _exit              0f6a9a
-_frexp             0f6956  _log               0f61d8  _main              0f4912
-dummy_int          0f6a9c  start              0f69f6  
+_disp_count        0004a4  _errno             000496  _exit              0f691a
+_frexp             0f67d6  _log               0f6058  _main              0f4930
+dummy_int          0f691c  start              0f6876  
 
 ##########################################
 # (4) GLOBAL EQU SYMBOL INFORMATION      #
@@ -252,18 +239,15 @@ __SB__           00000480
 ##########################################
 # (6) LOCAL LABEL INFORMATION            #
 ##########################################
-@ ncrt0 ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\ncrt0.r30 )
-@ Interrupts ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\Interrupts.r30 )
-@ LCD ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\LCD.r30 )
-@ MCUInit ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\MCUInit.r30 )
-@ QSK62P ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\QSK62P.r30 )
-@ _f4eq ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
-@ _f4le ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
+@ ncrt0 ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\ncrt0.r30 )
+@ Interrupts ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\Interrupts.r30 )
+@ LCD ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\LCD.r30 )
+@ MCUInit ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\MCUInit.r30 )
+@ QSK62P ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\QSK62P.r30 )
 @ _f4tof8 ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8add ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8div ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8ge ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
-@ _f8le ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8ltor ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8mul ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8sub ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
@@ -295,18 +279,15 @@ __SB__           00000480
 ##########################################
 # (7) LOCAL EQU SYMBOL INFORMATION       #
 ##########################################
-@ ncrt0 ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\ncrt0.r30 )
-@ Interrupts ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\Interrupts.r30 )
-@ LCD ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\LCD.r30 )
-@ MCUInit ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\MCUInit.r30 )
-@ QSK62P ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\QSK62P.r30 )
-@ _f4eq ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
-@ _f4le ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
+@ ncrt0 ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\ncrt0.r30 )
+@ Interrupts ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\Interrupts.r30 )
+@ LCD ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\LCD.r30 )
+@ MCUInit ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\MCUInit.r30 )
+@ QSK62P ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\QSK62P.r30 )
 @ _f4tof8 ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8add ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8div ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8ge ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
-@ _f8le ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8ltor ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8mul ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8sub ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
@@ -338,18 +319,15 @@ __SB__           00000480
 ##########################################
 # (8) LOCAL EQU BIT-SYMBOL INFORMATION   #
 ##########################################
-@ ncrt0 ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\ncrt0.r30 )
-@ Interrupts ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\Interrupts.r30 )
-@ LCD ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\LCD.r30 )
-@ MCUInit ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\MCUInit.r30 )
-@ QSK62P ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Debug\QSK62P.r30 )
-@ _f4eq ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
-@ _f4le ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
+@ ncrt0 ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\ncrt0.r30 )
+@ Interrupts ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\Interrupts.r30 )
+@ LCD ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\LCD.r30 )
+@ MCUInit ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\MCUInit.r30 )
+@ QSK62P ( C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\QSK62P.r30 )
 @ _f4tof8 ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8add ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8div ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8ge ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
-@ _f8le ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8ltor ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8mul ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
 @ _f8sub ( c:\program files (x86)\renesas\hew\tools\renesas\nc30wa\v544r00\lib30\nc30lib.lib )
@@ -409,21 +387,21 @@ rom_NO
 rom_FE
                                   000f4000  000f4000         0   1
 rom_FO
-                                  000f4000  000f400c         d   1
+                                  000f4000  000f402b        2c   1
 data_SEI
-                                  000f400e  000f400e         0   2
+                                  000f402c  000f402c         0   2
 data_SOI
-                                  000f400e  000f400e         0   1
+                                  000f402c  000f402c         0   1
 data_NEI
-                                  000f400e  000f4031        24   2
+                                  000f402c  000f404f        24   2
 data_NOI
-                                  000f4032  000f4032         1   1
+                                  000f4050  000f4050         1   1
 program
-                                  000f4034  000f69f4      29c1   2
+                                  000f4052  000f6874      2823   2
 interrupt
-                                  000f69f6  000f6a9c        a7   2
+                                  000f6876  000f691c        a7   2
 program_S
-                                  000f6a9e  000f6a9e         0   2
+                                  000f691e  000f691e         0   2
 vector
                                   000ffd00  000ffdff       100   1
 fvector
@@ -497,229 +475,214 @@ FILE=ncrt0
 
 SECTION=program
 FILE=C:/Users/Student/Desktop/Project-4/renesasPt4/renesasPt4/Interrupts
-                                  000f4034  000f40d6        a3
+                                  000f4052  000f40f4        a3
   _A2DInterrupt
-                                  000f4034         5   func ,g         0
+                                  000f4052         5   func ,g         0
   _UART0TransmitInterrupt
-                                  000f403a         6   func ,g         0
+                                  000f4058         6   func ,g         0
   _DMA0Interrupt
-                                  000f4040         6   func ,g         0
+                                  000f405e         6   func ,g         0
   _UART0ReceiveInterrupt
-                                  000f4046        1d   func ,g         0
+                                  000f4064        1d   func ,g         0
   _TimerA1Interrupt
-                                  000f4062        52   func ,g         0
+                                  000f4080        52   func ,g         0
   _TimerA2Interrupt
-                                  000f40b4         5   func ,g         0
+                                  000f40d2         5   func ,g         0
   _KeyBoardInterrupt
-                                  000f40ba         6   func ,g         0
+                                  000f40d8         6   func ,g         0
   _WakeUpInterrupt
-                                  000f40c0         6   func ,g         0
+                                  000f40de         6   func ,g         0
   _RTCInterrupt
-                                  000f40c6         6   func ,g         0
+                                  000f40e4         6   func ,g         0
   _TimerB0Interrupt
-                                  000f40cc         6   func ,g         0
+                                  000f40ea         6   func ,g         0
 
 FILE=C:/Users/Student/Desktop/Project-4/renesasPt4/renesasPt4/LCD
-                                  000f40d8  000f48a3       7cc
+                                  000f40f6  000f48c1       7cc
   _InitDisplay
-                                  000f40d8        8a   func ,g         0
+                                  000f40f6        8a   func ,g         0
   _BNSPrintf
-                                  000f4162       5af   func ,g         0
+                                  000f4180       5af   func ,g         0
   $BNSPutch
-                                  000f4712        58   func ,g         0
+                                  000f4730        58   func ,g         0
   $DisplayString
-                                  000f476a        5f   func ,g         0
+                                  000f4788        5f   func ,g         0
   $LCD_write
-                                  000f47c8        ae   func ,g         0
+                                  000f47e6        ae   func ,g         0
   _DisplayDelay
-                                  000f4876        2e   func ,g         0
+                                  000f4894        2e   func ,g         0
 
 FILE=C:/Users/Student/Desktop/Project-4/renesasPt4/renesasPt4/MCUInit
-                                  000f48a4  000f4910        6d
+                                  000f48c2  000f492e        6d
   _MCUInit
-                                  000f48a4        44   func ,g         0
+                                  000f48c2        44   func ,g         0
   _InitUART
-                                  000f48e8        29   func ,g         0
+                                  000f4906        29   func ,g         0
 
 FILE=C:/Users/Student/Desktop/Project-4/renesasPt4/renesasPt4/QSK62P
-                                  000f4912  000f4c3e       32d
+                                  000f4930  000f4c44       315
   _main
-                                  000f4912       2a8   func ,g         0
+                                  000f4930       28f   func ,g         0
   _TimerInit
-                                  000f4bba        29   func ,g         0
+                                  000f4bc0        2a   func ,g         0
   _ADInit
-                                  000f4be4         e   func ,g         0
-
-FILE=_f4eq
-                                  000f4c40  000f4c9b        5c
-  __f4eq
-                                  000f4c40        5c   func ,g         0
-
-FILE=_f4le
-                                  000f4c9c  000f4d1c        81
-  __f4le
-                                  000f4c9c        81   func ,g         0
+                                  000f4bea         e   func ,g         0
 
 FILE=_f4tof8
-                                  000f4d1e  000f4da3        86
+                                  000f4c46  000f4ccb        86
   __f4tof8
-                                  000f4d1e        86   func ,g         0
+                                  000f4c46        86   func ,g         0
 
 FILE=_f8add
-                                  000f4da4  000f56be       91b
+                                  000f4ccc  000f55e6       91b
   __f8add
-                                  000f4da4       6dd   func ,g         0
+                                  000f4ccc       6dd   func ,g         0
 
 FILE=_f8div
-                                  000f56c0  000f5988       2c9
+                                  000f55e8  000f58b0       2c9
   __f8div
-                                  000f56c0       2c9   func ,g         0
+                                  000f55e8       2c9   func ,g         0
 
 FILE=_f8ge
-                                  000f598a  000f5a30        a7
+                                  000f58b2  000f5958        a7
   __f8ge
-                                  000f598a        a7   func ,g         0
-
-FILE=_f8le
-                                  000f5a32  000f5ad8        a7
-  __f8le
-                                  000f5a32        a7   func ,g         0
+                                  000f58b2        a7   func ,g         0
 
 FILE=_f8ltor
-                                  000f5ada  000f5b2d        54
+                                  000f595a  000f59ad        54
   $_f8ltor
-                                  000f5ada        54   func ,g         0
+                                  000f595a        54   func ,g         0
 
 FILE=_f8mul
-                                  000f5b2e  000f5df4       2c7
+                                  000f59ae  000f5c74       2c7
   __f8mul
-                                  000f5b2e       2c7   func ,g         0
+                                  000f59ae       2c7   func ,g         0
 
 FILE=_f8sub
-                                  000f5df6  000f5e1d        28
+                                  000f5c76  000f5c9d        28
   __f8sub
-                                  000f5df6        28   func ,g         0
+                                  000f5c76        28   func ,g         0
 
 FILE=_f8tof4
-                                  000f5e1e  000f5ed0        b3
+                                  000f5c9e  000f5d50        b3
   __f8tof4
-                                  000f5e1e        b3   func ,g         0
+                                  000f5c9e        b3   func ,g         0
 
 FILE=_f8toi4u
-                                  000f5ed2  000f5ef6        25
+                                  000f5d52  000f5d76        25
   __f8toi4U
-                                  000f5ed2        25   func ,g         0
+                                  000f5d52        25   func ,g         0
 
 FILE=_ftol
-                                  000f5ef8  000f6008       111
+                                  000f5d78  000f5e88       111
   $_ftol
-                                  000f5ef8       111   func ,g         0
+                                  000f5d78       111   func ,g         0
 
 FILE=_i4divu
-                                  000f600a  000f6056        4d
+                                  000f5e8a  000f5ed6        4d
   __i4divU
-                                  000f600a        4d   func ,g         0
+                                  000f5e8a        4d   func ,g         0
 
 FILE=_i4modu
-                                  000f6058  000f60a2        4b
+                                  000f5ed8  000f5f22        4b
   __i4modU
-                                  000f6058        4b   func ,g         0
+                                  000f5ed8        4b   func ,g         0
 
 FILE=_i4mulu
-                                  000f60a4  000f60bf        1c
+                                  000f5f24  000f5f3f        1c
   __i4mulU
-                                  000f60a4        1c   func ,g         0
+                                  000f5f24        1c   func ,g         0
 
 FILE=_i4tof4
-                                  000f60c0  000f60e1        22
+                                  000f5f40  000f5f61        22
   __i4tof4
-                                  000f60c0        22   func ,g         0
+                                  000f5f40        22   func ,g         0
 
 FILE=_i4utof8
-                                  000f60e2  000f6103        22
+                                  000f5f62  000f5f83        22
   __i4Utof8
-                                  000f60e2        22   func ,g         0
+                                  000f5f62        22   func ,g         0
 
 FILE=_ltof
-                                  000f6104  000f61d7        d4
+                                  000f5f84  000f6057        d4
   $_ltof
-                                  000f6104        d4   func ,g         0
+                                  000f5f84        d4   func ,g         0
 
 FILE=log
-                                  000f61d8  000f650e       337
+                                  000f6058  000f638e       337
   _log
-                                  000f61d8       337   func ,g         0
+                                  000f6058       337   func ,g         0
 
 FILE=_f4adds
-                                  000f6510  000f664a       13b
+                                  000f6390  000f64ca       13b
   __f4sub
-                                  000f653a         0   func ,g         0
+                                  000f63ba         0   func ,g         0
   __f4add
-                                  000f6540         0   func ,g         0
+                                  000f63c0         0   func ,g         0
 
 FILE=_f4divs
-                                  000f664c  000f670f        c4
+                                  000f64cc  000f658f        c4
   __f4div
-                                  000f666e         0   func ,g         0
+                                  000f64ee         0   func ,g         0
 
 FILE=_f4muls
-                                  000f6710  000f67bf        b0
+                                  000f6590  000f663f        b0
   __f4mul
-                                  000f6734         0   func ,g         0
+                                  000f65b4         0   func ,g         0
 
 FILE=_f4rets
-                                  000f67c0  000f67f1        32
+                                  000f6640  000f6671        32
   __f4retInf
-                                  000f67ca         0   none ,g         0
+                                  000f664a         0   none ,g         0
   __f4retNaN
-                                  000f67c0         0   none ,g         0
+                                  000f6640         0   none ,g         0
   __f4retNum
-                                  000f67da         0   none ,g         0
+                                  000f665a         0   none ,g         0
   __f4retZero
-                                  000f67c6         0   none ,g         0
+                                  000f6646         0   none ,g         0
 
 FILE=_f4ltor
-                                  000f67f2  000f6837        46
+                                  000f6672  000f66b7        46
   $_f4ltor
-                                  000f67f2        46   func ,g         0
+                                  000f6672        46   func ,g         0
 
 FILE=_f4rtol
-                                  000f6838  000f6875        3e
+                                  000f66b8  000f66f5        3e
   $_f4rtol
-                                  000f6838        3e   func ,g         0
+                                  000f66b8        3e   func ,g         0
 
 FILE=_f8ne
-                                  000f6876  000f68f1        7c
+                                  000f66f6  000f6771        7c
   __f8ne
-                                  000f6876        7c   func ,g         0
+                                  000f66f6        7c   func ,g         0
 
 FILE=_f8rtol
-                                  000f68f2  000f6932        41
+                                  000f6772  000f67b2        41
   $_f8rtol
-                                  000f68f2        41   func ,g         0
+                                  000f6772        41   func ,g         0
 
 FILE=_i4tof8
-                                  000f6934  000f6955        22
+                                  000f67b4  000f67d5        22
   __i4tof8
-                                  000f6934        22   func ,g         0
+                                  000f67b4        22   func ,g         0
 
 FILE=frexp
-                                  000f6956  000f69a2        4d
+                                  000f67d6  000f6822        4d
   _frexp
-                                  000f6956        4d   func ,g         0
+                                  000f67d6        4d   func ,g         0
 
 FILE=ldexp
-                                  000f69a4  000f69f4        51
+                                  000f6824  000f6874        51
   $ldexp
-                                  000f69a4        51   func ,g         0
+                                  000f6824        51   func ,g         0
 
 SECTION=interrupt
 FILE=ncrt0
-                                  000f69f6  000f6a9c        a7
+                                  000f6876  000f691c        a7
   $exit
-                                  000f6a9a         0   none ,g         0
+                                  000f691a         0   none ,g         0
   _exit
-                                  000f6a9a         0   none ,g         0
+                                  000f691a         0   none ,g         0
   dummy_int
-                                  000f6a9c         0   none ,g         0
+                                  000f691c         0   none ,g         0
 
