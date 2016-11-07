@@ -138,16 +138,65 @@ class TimeFrame(tk.Frame):
 class OptionsFrame(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
+        
+        self.alert_temp = tk.StringVar()
+        self.alert_temp.set('85')
+
+        self.baud_rate = tk.StringVar()
+        self.baud_rate.set('9600')
+
+        self.num_bits = tk.StringVar()
+        self.num_bits.set('1')
+
+        self.parity = tk.StringVar()
+        self.parity.set('EVEN')
+
+        self.stop_bits = tk.StringVar()
+        self.stop_bits.set('1')
+        
         self._create_widgets()
 
     def _create_widgets(self):
         alert_temp_label = tk.Label(self, text='Alert Temp')
-        alert_temp_label.pack(side=tk.LEFT)
+        alert_temp_label.grid(row=0)
         
-        self.alert_temp = tk.StringVar()
         self.alert_temp_entry = tk.Entry(self, textvariable=self.alert_temp)
-        self.alert_temp.set('85')
-        self.alert_temp_entry.pack(side=tk.LEFT)
+        self.alert_temp_entry.grid(row=0, column=1)
+
+        baud_rate_label = tk.Label(self, text='Baud Rate')
+        baud_rate_label.grid(row=1)
+
+        self.baud_rate_entry = tk.Entry(self, textvariable=self.baud_rate)
+        self.baud_rate_entry.grid(row=1, column=1)
+
+        num_bits_label = tk.Label(self, text='Number of Bits')
+        num_bits_label.grid(row=1, column=2)
+
+        self.num_bits_entry = tk.Entry(self, textvariable=self.num_bits)
+        self.num_bits_entry.grid(row=1, column=3)
+
+        parity_label = tk.Label(self, text='Parity')
+        parity_label.grid(row=2)
+
+        self.parity_menu = tk.OptionMenu(self, self.parity, 'EVEN', 'ODD')
+        self.parity_menu.grid(row=2, column=1)
+
+        stop_bits_label = tk.Label(self, text='Number of Stop Bits')
+        stop_bits_label.grid(row=2, column=2)
+
+        self.stop_bits_entry = tk.Entry(self, textvariable=self.stop_bits)
+        self.stop_bits_entry.grid(row=2, column=3)
+
+        self.reconfigure = tk.Button(self, text='Reconfigure', command=self.reconfigure_serial)
+        self.reconfigure.grid(row=3)
+
+    def _create_packet(self):
+        payload = 'BR:{},NB:{},P:{},SB:{}'.format(self.baud_rate.get(), self.num_bits.get(), self.parity.get(), self.stop_bits.get())
+        return payload
+
+    def reconfigure_serial(self):
+        print(self._create_packet())
+
 
     def get_alert_temp(self):
         if self.alert_temp.get() == '':
@@ -215,8 +264,13 @@ SECONDS = 'SECONDS'
 address = 0x68
 bus = smbus.SMBus(1)
 ser = serial.Serial('/dev/ttyAMA0', 9600)
+    
 
 def decrement_unit_time(curr_selected_option, time, bus):
+    """
+    Decrements the unit of time on the real time clock
+    based on the current selection in the GUI
+    """
     if curr_selected_option == HOURS:
         hours = int_to_bcd(bus.read_byte_data(address, 2))
         bus.write_byte_data(address, 2, hours - 1)
@@ -228,6 +282,10 @@ def decrement_unit_time(curr_selected_option, time, bus):
         bus.write_byte_data(address, 0, seconds - 1)
 
 def increment_unit_time(curr_selected_option, time, bus):
+    """
+    Increments the unit of time on the real time clock
+    based on the current selection in the GUI
+    """
     if curr_selected_option == HOURS:
         hours = int_to_bcd(bus.read_byte_data(address, 2))
         bus.write_byte_data(address, 2, hours + 1)
@@ -249,14 +307,15 @@ if __name__ == '__main__':
      
     bus.write_byte_data(address, 0, 0)
     bus.write_byte_data(address, 1, 0)
-    bus.write_byte_data(address, 2, 8)
+    bus.write_byte_data(address, 2, 0)
     bus.write_byte_data(address, 3, 0)
     
     ren_temperature = Temperature()
     rtc_temperature = Temperature()
+    
     time  = Time()
-    overheat_time = Time()
     normal_time = Time()
+    overheat_time = Time()
     time_overheated = Time()
 
     overheat_flag = False
@@ -268,16 +327,23 @@ if __name__ == '__main__':
         data = ''
         alert_temp = int(app.options_frame.get_alert_temp())
         app.ren_temperature_frame.set_alert_temp(alert_temp)
-        
+
+        # Read in the time from the real time clock
+        # they are read in BCD, they need to be converted. 
         seconds = int_to_bcd(bus.read_byte_data(address, 0))
         minutes = int_to_bcd(bus.read_byte_data(address, 1))
         hours = int_to_bcd(bus.read_byte_data(address, 2))
         day = int_to_bcd(bus.read_byte_data(address, 3))
-        
+
+        # Set the time on the GUI
         time.set_time(seconds, minutes, hours)
 
+        # Read the temperature from the Real Time Clock Register
         rtc_temp = bus.read_byte_data(address, 17)
 
+        # Only read from the serial port if
+        # there is something there. This prevents
+        # blocking of the GUI
         if ser.inWaiting() > 0:
             data = str(ser.readline(ser.inWaiting()), 'utf-8')
 
@@ -298,19 +364,21 @@ if __name__ == '__main__':
                 app.time_frame.toggle_hours()
                 curr_selected_option = HOURS
                 
-       
-        
         rand_num = random.randrange(0, 100)
         root.after(500, ren_temperature.set_temperature(rand_num))
-        #root.after(500, rtc_temperature.set_temperature(random.randrange(0, 100)))
         
         # ren_temperature.set_temperature(float(data))
         rtc_temperature.set_temperature(rtc_temp * 1.8 + 32)
 
+        # If the temperature is above the alert temp
+        # Then set the overheat time
         if rand_num > alert_temp:
             overheat_time.set_time(seconds, minutes, hours)
             overheat_flag = True
 
+        # If it was overheating and goes back to normal
+        # set the last normal time clock, and display the time
+        # that it was overheated
         if rand_num < alert_temp and overheat_flag:
             normal_time.set_time(seconds, minutes, hours)
             time_diff = normal_time.difference(overheat_time)
