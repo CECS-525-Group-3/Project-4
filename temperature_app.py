@@ -3,7 +3,9 @@ import tkinter as tk
 
 import serial
 import smbus
-# import pygame
+import Adafruit_GPIO.SPI as SPI
+import Adafruit_MCP3008
+import pygame
 
 
 class Temperature(object):
@@ -191,17 +193,22 @@ class OptionsFrame(tk.Frame):
         self.reconfigure.grid(row=3)
 
     def _create_packet(self):
-        payload = 'BR:{},NB:{},P:{},SB:{}'.format(self.baud_rate.get(), self.num_bits.get(), self.parity.get(), self.stop_bits.get())
+        payload = 'B{}N{}P{}S{}'.format(self.baud_rate.get(), self.num_bits.get(), self.get_coded_parity(), self.stop_bits.get())
         return payload
 
     def reconfigure_serial(self):
         print(self._create_packet())
+        ser.write(bytes(self._create_packet(), 'utf-8'))
 
+    def get_coded_parity(self):
+        if self.parity.get() == 'EVEN':
+            return 1
+        return 0
 
     def get_alert_temp(self):
         if self.alert_temp.get() == '':
-            return '0'
-        return self.alert_temp.get()
+            return 0
+        return int(self.alert_temp.get())
 
 
 class Application(tk.Frame):
@@ -264,6 +271,11 @@ SECONDS = 'SECONDS'
 address = 0x68
 bus = smbus.SMBus(1)
 ser = serial.Serial('/dev/ttyAMA0', 9600)
+
+MAX_ADC = 1023
+SPI_PORT   = 0
+SPI_DEVICE = 0
+mcp = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
     
 
 def decrement_unit_time(curr_selected_option, time, bus):
@@ -302,8 +314,8 @@ if __name__ == '__main__':
     root.wm_title('Temperature Display')
     root.geometry('1100x700')
     
-    # pygame.mixer.init()
-    # pygame.mixer.music.load('blip.mp3')
+    pygame.mixer.init()
+    pygame.mixer.music.load('blip.mp3')
      
     bus.write_byte_data(address, 0, 0)
     bus.write_byte_data(address, 1, 0)
@@ -320,12 +332,18 @@ if __name__ == '__main__':
 
     overheat_flag = False
     curr_selected_option = None
+
+    temp = 0
+    alert_temp = 85
     
     app = Application(ren_temperature, rtc_temperature, time, overheat_time, normal_time, time_overheated, master=root)
     
     while True:
-        data = ''
-        alert_temp = int(app.options_frame.get_alert_temp())
+        if app.options_frame.get_alert_temp() != alert_temp:
+            ser.write(bytes('T{}$\r\n'.format(app.options_frame.get_alert_temp()), 'utf-8'))
+            
+        alert_temp = app.options_frame.get_alert_temp()
+        
         app.ren_temperature_frame.set_alert_temp(alert_temp)
 
         # Read in the time from the real time clock
@@ -341,19 +359,15 @@ if __name__ == '__main__':
         # Read the temperature from the Real Time Clock Register
         rtc_temp = bus.read_byte_data(address, 17)
 
-        # Only read from the serial port if
-        # there is something there. This prevents
-        # blocking of the GUI
-        if ser.inWaiting() > 0:
-            data = str(ser.readline(ser.inWaiting()), 'utf-8')
+        data = str(ser.readline(), 'utf-8')
 
-        if re.match(r'CBUT', data):
+        if re.match(r'ACTION:CBUT', data):
             increment_unit_time(curr_selected_option, time, bus)
             
-        elif re.match(r'RBUT', data):
+        elif re.match(r'ACTION:RBUT', data):
             decrement_unit_time(curr_selected_option, time, bus)
             
-        elif re.match(r'LBUT', data):
+        elif re.match(r'ACTION:LBUT', data):
             if curr_selected_option == HOURS:
                 app.time_frame.toggle_minutes()
                 curr_selected_option = MINUTES
@@ -363,23 +377,22 @@ if __name__ == '__main__':
             elif curr_selected_option == SECONDS or curr_selected_option is None:
                 app.time_frame.toggle_hours()
                 curr_selected_option = HOURS
-                
-        rand_num = random.randrange(0, 100)
-        root.after(500, ren_temperature.set_temperature(rand_num))
+        elif re.match(r'TEMP:[0-9.]*', data):
+            temp = float(re.findall(r'TEMP:([0-9.]*)', data)[0])
+            ren_temperature.set_temperature(temp)       
         
-        # ren_temperature.set_temperature(float(data))
         rtc_temperature.set_temperature(rtc_temp * 1.8 + 32)
 
         # If the temperature is above the alert temp
         # Then set the overheat time
-        if rand_num > alert_temp:
+        if temp > alert_temp and not overheat_flag:
             overheat_time.set_time(seconds, minutes, hours)
             overheat_flag = True
 
         # If it was overheating and goes back to normal
         # set the last normal time clock, and display the time
         # that it was overheated
-        if rand_num < alert_temp and overheat_flag:
+        if temp < alert_temp and overheat_flag:
             normal_time.set_time(seconds, minutes, hours)
             time_diff = normal_time.difference(overheat_time)
             time_overheated.set_time(time_diff[0], time_diff[1], time_diff[2])
@@ -387,8 +400,11 @@ if __name__ == '__main__':
         
         root.update_idletasks()
         root.update()
+
+        adc_value = mcp.read_adc(0)
         
-        # if(temperature.get_temperature() >= 80):
-            # pygame.mixer.music.play()
-            # while pygame.mixer.music.get_busy() == True:
-                # continue
+        pygame.mixer.music.set_volume(adc_value/MAX_ADC)
+        if(ren_temperature.get_temperature() >= alert_temp):
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy() == True:
+                continue
