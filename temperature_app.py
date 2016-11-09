@@ -8,6 +8,7 @@ import Adafruit_MCP3008
 import pygame
 
 from time import sleep
+from datetime import datetime
 
 
 class Temperature(object):
@@ -41,11 +42,19 @@ class Time(object):
         self._exec_callbacks()
 
     def difference(self, other_time):
-        sec_diff = abs(self._seconds - other_time._seconds)
-        min_diff = abs(self._minutes - other_time._minutes)
-        hour_diff = abs(self._hours - other_time._hours)
+        fmt = '%H:%M:%S'
+        time_one = '{:0>2}:{:0>2}:{:0>2}'.format(self._hours, self._minutes, self._seconds)
+        time_two = '{:0>2}:{:0>2}:{:0>2}'.format(other_time._hours, other_time._minutes, other_time._seconds)
+        tdelta = datetime.strptime(time_one, fmt) - datetime.strptime(time_two, fmt)
         
-        return (sec_diff, min_diff, hour_diff)
+        seconds = tdelta.seconds
+        
+        hours = seconds // (60*60)
+        seconds %= (60*60)
+        minutes = seconds // 60
+        seconds %= 60
+        
+        return (seconds, minutes, hours)
 
     def _exec_callbacks(self):
         for callback in self._observers:
@@ -174,13 +183,13 @@ class OptionsFrame(tk.Frame):
         baud_rate_label = tk.Label(self, text='Baud Rate')
         baud_rate_label.grid(row=1)
 
-        self.baud_rate_entry = tk.Entry(self, textvariable=self.baud_rate)
+        self.baud_rate_entry = tk.OptionMenu(self, self.baud_rate, '9600', '19200', '38400', '57600')
         self.baud_rate_entry.grid(row=1, column=1)
 
         num_bits_label = tk.Label(self, text='Number of Bits')
         num_bits_label.grid(row=1, column=2)
 
-        self.num_bits_entry = tk.Entry(self, textvariable=self.num_bits)
+        self.num_bits_entry = tk.OptionMenu(self, self.num_bits, '6', '7', '8')
         self.num_bits_entry.grid(row=1, column=3)
 
         parity_label = tk.Label(self, text='Parity')
@@ -192,7 +201,7 @@ class OptionsFrame(tk.Frame):
         stop_bits_label = tk.Label(self, text='Number of Stop Bits')
         stop_bits_label.grid(row=2, column=2)
 
-        self.stop_bits_entry = tk.Entry(self, textvariable=self.stop_bits)
+        self.stop_bits_entry = tk.OptionMenu(self, self.stop_bits, '1', '2')
         self.stop_bits_entry.grid(row=2, column=3)
 
         self.reconfigure = tk.Button(self, text='Reconfigure', command=self.reconfigure_serial)
@@ -212,6 +221,7 @@ class OptionsFrame(tk.Frame):
         ser.baudrate = int(self.baud_rate.get())
         ser.bytesize = self.get_pyserial_bytesize()
         ser.parity = self.get_pyserial_parity()
+        ser.stopbits = self.get_pyserial_stopbits()
         ser.flushInput()
         ser.flushOutput()
 
@@ -231,13 +241,20 @@ class OptionsFrame(tk.Frame):
         elif self.parity.get() == 'NONE':
             return serial.PARITY_NONE
         return serial.PARITY_ODD
+
+    def get_pyserial_stopbits(self):
+        if int(self.stop_bits.get()) == 1:
+            return serial.STOPBITS_ONE
+        elif int(self.stop_bits.get()) == 2:
+            return serial.STOPBITS_TWO
+            
     
     def get_coded_parity(self):
         if self.parity.get() == 'EVEN':
-            return 0
+            return 1
         elif self.parity.get() == 'NONE':
             return 2
-        return 1
+        return 0
 
     def set_alert_temp(self):
         if self.tk_alert_temp.get() == '':
@@ -308,7 +325,7 @@ MINUTES = 'MINUTE'
 SECONDS = 'SECONDS'
 address = 0x68
 bus = smbus.SMBus(1)
-ser = serial.Serial('/dev/ttyAMA0', 9600)
+ser = serial.Serial('/dev/ttyAMA0', 9600, timeout=1)
 
 MAX_ADC = 1023
 SPI_PORT   = 0
@@ -401,11 +418,13 @@ if __name__ == '__main__':
         # Read the temperature from the Real Time Clock Register
         rtc_temp = bus.read_byte_data(address, 17)
         
-        if ser.inWaiting() > 0:
-            try:
-                data = str(ser.readline(ser.inWaiting()), 'utf-8')
-            except BlockingIOError:
-                pass
+        #if ser.inWaiting() > 0:
+         #   try:
+        #       data = str(ser.readline(ser.inWaiting()), 'utf-8')
+         #   except BlockingIOError:
+          #      pass
+
+        data = str(ser.readline(), 'utf-8')
 
         if re.match(r'ACTION:CBUT', data):
             increment_unit_time(curr_selected_option, time, bus)
