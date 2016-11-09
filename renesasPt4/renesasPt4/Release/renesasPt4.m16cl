@@ -1,0 +1,9 @@
+-L "nc30lib"
+-G
+-MS
+-O "C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\renesasPt4.x30"
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\ncrt0.r30"
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\Interrupts.r30"
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\LCD.r30"
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\MCUInit.r30"
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Release\QSK62P.r30"

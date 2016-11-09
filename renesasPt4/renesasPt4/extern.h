@@ -20,3 +20,4 @@ extern uint A2DValue;
 extern uint A2DValuePot;
 extern uint A2DValueTherm;
 extern uchar A2DProcessed;
+extern int alert_temp;

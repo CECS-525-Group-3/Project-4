@@ -1,6 +1,8 @@
 #include "QSKDefines.h"
 #include "proto.h"
 #include "extern.h"
+#include "string.h"
+#include "stdlib.h"
 
 /***********************************************************************/
 /*                                                                     */
@@ -27,6 +29,11 @@
 #pragma INTERRUPT RTCInterrupt
 #pragma INTERRUPT TimerB0Interrupt
 #pragma INTERRUPT WatchDogInterrupt
+
+char command[20];
+char pivalue[20];
+int pinum;
+int i = 0;
 
 void A2DInterrupt(void)
 //-----------------------------------------------------------------------------------------------------
@@ -74,12 +81,131 @@ void UART0ReceiveInterrupt(void)
 //  Notes:          None    
 //-----------------------------------------------------------------------------------------------------
 {
-	while(ri_u0c1 == 0);	  // make sure receive is complete
+	int j;
+	char* token;
+	char data;
+	while(ri_u0c1 == 0);	 // make sure receive is complete
 	
-    while(ti_u0c1 == 0); 			//  puts it in the UART 0 transmit buffer 
+	data = (char) u0rb;
+	
+	// Get command
+	if(data == '$')
+	{
+		command[i] = (char) u0rb;
+		i++;
+		
+		// Build p-value
+		for(i = 1; i < strlen(command); i++)
+		{
+			if(command[i] == '$')
+			{
+				pivalue[i - 1] = '\0';
+				pinum = atoi(pivalue);
+				
+				// Parse packet for new alert temp
+				if(command[0] == 'T')
+				{
+					alert_temp = pinum;
+				}
+				
+				// Parse packet for new serial settings
+				else if(command[0] == 'B')
+				{
+					// Get first token
+					token = strtok(command, ",");
+					
+					// Get rest of tokens
+					while(token != NULL)
+					{	
+						// Parse baud rate	
+						if(token[0] == 'B')
+						{
+							pinum = atoi(token+1);
+							
+							u0brg = (unsigned char)(((f1_CLK_SPEED/16)/pinum)-1);
+						}
+								
+						// Parse num bits								
+						if(token[0] == 'N')
+						{
+							pinum = atoi(token+1);
+							
+							if(pinum == 7)
+							{
+								u0mr = u0mr | 0x04;
+							}
+							else if(pinum == 8)
+							{
+								u0mr = u0mr | 0x05;	
+							}
+							else
+							{
+								u0mr = u0mr | 0x06;
+							}
+						}
+						// Parse parity
+						else if(token[0] == 'P')
+						{
+							pinum = atoi(token+1);
+							
+							if(pinum == 0)
+							{	
+								u0mr ^= (-1^u0mr) &(1 << 6);
+								u0mr ^= (-0^u0mr) &(1 << 5);
+							}
+							else if(pinum == 1)
+							{
+								u0mr ^= (-1^u0mr) &(1 << 6);
+								u0mr ^= (-1^u0mr) &(1 << 5);
+							}
+							else
+							{
+								u0mr ^= (-0^u0mr) &(1 << 6);
+								u0mr ^= (-0^u0mr) &(1 << 5);
+							}
+						}
+						
+						// Parse stop bits
+						else if(token[0] == 'S')
+						{
+							pinum = atoi(token+1);
+							
+							if(pinum == 1)
+							{
+								u0mr ^= (-0^u0mr) &(1 << 4);
+							}
+							else if(pinum == 2)
+							{
+								u0mr ^= (-1^u0mr) &(1 << 4);
+							}
+						}
 
-	u0tb = (char) u0rb;      // read in received data
-    
+						// Retoken
+						token = strtok(NULL, ",");
+					}
+				}
+				
+				for(j = 0; j < 20; j++)
+				{
+					command[j] = 0;
+					pivalue[j] = 0;
+				}
+				
+				i = 0;
+				token = NULL;
+				break;
+			}
+			else
+			{
+				pivalue[i - 1] = command[i];
+			}
+		}
+	}
+	else
+	{
+		command[i] = (char) u0rb;
+		i++;
+	}
 }
 
 void TimerA1Interrupt(void)
