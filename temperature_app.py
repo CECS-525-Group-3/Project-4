@@ -7,6 +7,8 @@ import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 import pygame
 
+from time import sleep
+
 
 class Temperature(object):
     def __init__(self):
@@ -141,17 +143,18 @@ class OptionsFrame(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
         
-        self.alert_temp = tk.StringVar()
-        self.alert_temp.set('85')
+        self.alert_temp = 85
+        self.tk_alert_temp = tk.StringVar()
+        self.tk_alert_temp.set('85')
 
         self.baud_rate = tk.StringVar()
         self.baud_rate.set('9600')
 
         self.num_bits = tk.StringVar()
-        self.num_bits.set('1')
+        self.num_bits.set('8')
 
         self.parity = tk.StringVar()
-        self.parity.set('EVEN')
+        self.parity.set('NONE')
 
         self.stop_bits = tk.StringVar()
         self.stop_bits.set('1')
@@ -162,8 +165,11 @@ class OptionsFrame(tk.Frame):
         alert_temp_label = tk.Label(self, text='Alert Temp')
         alert_temp_label.grid(row=0)
         
-        self.alert_temp_entry = tk.Entry(self, textvariable=self.alert_temp)
+        self.alert_temp_entry = tk.Entry(self, textvariable=self.tk_alert_temp)
         self.alert_temp_entry.grid(row=0, column=1)
+
+        set_temp = tk.Button(self, text='Set', command=self.set_alert_temp)
+        set_temp.grid(row=0, column=2)
 
         baud_rate_label = tk.Label(self, text='Baud Rate')
         baud_rate_label.grid(row=1)
@@ -180,7 +186,7 @@ class OptionsFrame(tk.Frame):
         parity_label = tk.Label(self, text='Parity')
         parity_label.grid(row=2)
 
-        self.parity_menu = tk.OptionMenu(self, self.parity, 'EVEN', 'ODD')
+        self.parity_menu = tk.OptionMenu(self, self.parity, 'NONE', 'EVEN', 'ODD')
         self.parity_menu.grid(row=2, column=1)
 
         stop_bits_label = tk.Label(self, text='Number of Stop Bits')
@@ -193,22 +199,54 @@ class OptionsFrame(tk.Frame):
         self.reconfigure.grid(row=3)
 
     def _create_packet(self):
-        payload = 'B{}N{}P{}S{}'.format(self.baud_rate.get(), self.num_bits.get(), self.get_coded_parity(), self.stop_bits.get())
+        payload = 'B{},N{},P{},S{}$'.format(self.baud_rate.get(), self.num_bits.get(), self.get_coded_parity(), self.stop_bits.get())
         return payload
 
     def reconfigure_serial(self):
-        print(self._create_packet())
-        ser.write(bytes(self._create_packet(), 'utf-8'))
+        #print(self._create_packets())
+        packet = self._create_packet()
+        print(packet)
+        ser.write(bytes(packet, 'utf-8'))
 
+        sleep(1)
+        ser.baudrate = int(self.baud_rate.get())
+        ser.bytesize = self.get_pyserial_bytesize()
+        ser.parity = self.get_pyserial_parity()
+        ser.flushInput()
+        ser.flushOutput()
+
+    def get_pyserial_bytesize(self):
+        if int(self.num_bits.get()) == 5:
+            return serial.FIVEBITS
+        elif int(self.num_bits.get()) == 6:
+            return serial.SIXBITS
+        elif int(self.num_bits.get()) == 7:
+            return serial.SEVENBITS
+        elif int(self.num_bits.get()) == 8:
+            return serial.EIGHTBITS
+
+    def get_pyserial_parity(self):
+        if self.parity.get() == 'EVEN':
+            return serial.PARITY_EVEN
+        elif self.parity.get() == 'NONE':
+            return serial.PARITY_NONE
+        return serial.PARITY_ODD
+    
     def get_coded_parity(self):
         if self.parity.get() == 'EVEN':
-            return 1
-        return 0
+            return 0
+        elif self.parity.get() == 'NONE':
+            return 2
+        return 1
+
+    def set_alert_temp(self):
+        if self.tk_alert_temp.get() == '':
+            self.alert_temp = 0
+        else:
+            self.alert_temp = int(self.tk_alert_temp.get())
 
     def get_alert_temp(self):
-        if self.alert_temp.get() == '':
-            return 0
-        return int(self.alert_temp.get())
+        return self.alert_temp
 
 
 class Application(tk.Frame):
@@ -337,10 +375,14 @@ if __name__ == '__main__':
     alert_temp = 85
     
     app = Application(ren_temperature, rtc_temperature, time, overheat_time, normal_time, time_overheated, master=root)
+
+    ser.flushInput()
+    ser.flushOutput()
     
     while True:
+        data = ''
         if app.options_frame.get_alert_temp() != alert_temp:
-            ser.write(bytes('T{}$\r\n'.format(app.options_frame.get_alert_temp()), 'utf-8'))
+            ser.write(bytes('T{}$'.format(app.options_frame.get_alert_temp()), 'utf-8'))
             
         alert_temp = app.options_frame.get_alert_temp()
         
@@ -358,8 +400,12 @@ if __name__ == '__main__':
 
         # Read the temperature from the Real Time Clock Register
         rtc_temp = bus.read_byte_data(address, 17)
-
-        data = str(ser.readline(), 'utf-8')
+        
+        if ser.inWaiting() > 0:
+            try:
+                data = str(ser.readline(ser.inWaiting()), 'utf-8')
+            except BlockingIOError:
+                pass
 
         if re.match(r'ACTION:CBUT', data):
             increment_unit_time(curr_selected_option, time, bus)
