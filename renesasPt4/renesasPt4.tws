@@ -7,13 +7,31 @@
 [GENERAL_DATA]
 [BREAKPOINTS]
 [OPEN_WORKSPACE_FILES]
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\extern.h" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Interrupts.c" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\LCD.c" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\LCD.h" 
 "C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\MCUInit.c" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\nc_define.inc" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\ncrt0.a30" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\proto.h" 
 "C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\QSK62P.c" 
 "C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\QSKDefines.h" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\sect30.inc" 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\sfr62p.h" 
 [WORKSPACE_FILE_STATES]
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\Interrupts.c" 25 25 1078 356 0 8 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\LCD.c" 75 75 1078 356 0 3 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\LCD.h" 100 100 1078 356 0 4 
 "C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\MCUInit.c" 25 25 1078 356 0 1 
 "C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\QSK62P.c" -8 -30 1244 544 1 0 
-"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\QSKDefines.h" 50 50 1078 356 0 2 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\QSKDefines.h" 0 0 1184 544 0 2 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\extern.h" 150 150 1078 356 0 6 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\nc_define.inc" 0 0 1078 356 0 7 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\ncrt0.a30" 125 125 1078 356 0 12 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\proto.h" 125 125 1078 356 0 5 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\sect30.inc" 75 75 1078 356 0 10 
+"C:\Users\Student\Desktop\Project-4\renesasPt4\renesasPt4\sfr62p.h" 50 50 1078 356 0 9 
 [LOADED_PROJECTS]
 "renesasPt4" 
 [END]

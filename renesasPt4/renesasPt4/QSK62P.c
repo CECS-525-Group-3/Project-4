@@ -1,6 +1,7 @@
 #include "QSKDefines.h"
 #include "proto.h"
 #include "extern.h"
+#include "math.h"
 
 /***********************************************************************/
 /*                                                                     */
@@ -15,7 +16,6 @@
 /*  All rights reserved.											   */
 /*                                                                     */
 /***********************************************************************/
-
 int disp_count;				// LED control variable
 uint A2DValue;
 uint A2DValuePot;
@@ -24,6 +24,7 @@ uint btn1 = 0;
 uint btn2 = 0; 
 uint btn3 = 0;
 uchar A2DProcessed;
+int alert_temp = 85;
 
 void main(void)
 //-----------------------------------------------------------------------------------------------------
@@ -35,9 +36,10 @@ void main(void)
 //  Notes:          None    
 //-----------------------------------------------------------------------------------------------------
 {
-	unsigned int f1 = 0;
-	unsigned int f2 = 0;
-	unsigned int f3 = 0;
+	unsigned int f1;
+	unsigned int f2;
+	unsigned int f3;
+	int prev_alert_temp = 0;
 	float prevT = 0.0;
 	float B = 3960.0;
 	float r0 = 10000.0;
@@ -57,7 +59,7 @@ void main(void)
 	p0_0 = 1;
 
 	while(1)
-	{			
+	{
 		// Get resist
 		r = 10000.0 * A2DValueTherm / (1024.0 - A2DValueTherm);
 					
@@ -70,10 +72,10 @@ void main(void)
 		// Convert to F
 		t = (t * (9.0/5.0)) + 32.2;
 			
-		/*if(prevT != t && t > 0)
+		if(prevT != t && t > 0)
 		{	
 			// Turn on fan
-			if(t > 80.0)
+			if(t > alert_temp)
 			{
 				p0_0 = 1;
 			}
@@ -82,10 +84,11 @@ void main(void)
 				p0_0 = 0;
 			}
 			
-			BNSPrintf(SERIAL, "TEMP:%0.2f\r\n", t);
+			// Print temp to serial + newline
+			BNSPrintf(SERIAL,"TEMP:%0.2f\r\n", t);
 			
 			prevT = t;
-		}*/
+		}
 		
 		// If button pressed
 		if(S1 == 0 && f1 == 0)
@@ -110,6 +113,12 @@ void main(void)
 			f2 = 0;
 		if(S3 == 1)
 			f3 = 0;
+			
+		// Set alert temp if it changes and print it
+		if(alert_temp != prev_alert_temp)
+		{
+			prev_alert_temp = alert_temp;
+		}
 	}
 }			
 
