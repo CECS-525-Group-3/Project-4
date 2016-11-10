@@ -80,7 +80,7 @@ class TemperatureFrame(tk.Frame):
         self.alert_temp = alert_temp
 
     def _create_text(self):
-        self.temperature_label = tk.Label(self.master, text=u'{}: 0\u2109'.format(self.label), font=('Arial', 50))
+        self.temperature_label = tk.Label(self.master, text=u'{}: 0\u2109'.format(self.label), font=('Arial', 20))
         self.temperature_label.pack()
 
     def _update_temperature(self, temperature):
@@ -93,14 +93,15 @@ class TemperatureFrame(tk.Frame):
 
 
 class ThermometerFrame(tk.Frame):
-    def __init__(self, temperature, master=None):
+    def __init__(self, temperature, label, master=None):
         super().__init__(master)
         self.canvas = tk.Canvas(self, width=300, height=800)
-        self.canvas.pack(side=tk.LEFT)
+        self.canvas.pack()
 
         self.photo = tk.PhotoImage(file="thermometer.gif")
         self.canvas.create_image(200, 300, image=self.photo)
         self.canvas.create_oval(200 - 42, 530 - 42, 200 + 42, 530 + 42 , fill='red')
+        self.canvas.create_text(200, 580, text=label, font=('Arial', 12))
         temperature.bind_to(self.draw_mercury)
     
     def draw_mercury(self, temperature):
@@ -124,20 +125,20 @@ class TimeFrame(tk.Frame):
     def toggle_hours(self):
         self.toggle_canvas.delete('min')
         self.toggle_canvas.delete('sec')
-        self.toggle_canvas.create_line(260, 0, 350, 0, width=5, tags='hour')
+        self.toggle_canvas.create_line(235, 0, 265, 0, width=5, tags='hour')
 
     def toggle_minutes(self):
         self.toggle_canvas.delete('hour')
         self.toggle_canvas.delete('sec')
-        self.toggle_canvas.create_line(370, 0, 460, 0, width=5, tags='min')
+        self.toggle_canvas.create_line(280, 0, 310, 0, width=5, tags='min')
 
     def toggle_seconds(self):
         self.toggle_canvas.delete('hour')
         self.toggle_canvas.delete('min')
-        self.toggle_canvas.create_line(480, 0, 570, 0, width=5, tags='sec')  
+        self.toggle_canvas.create_line(325, 0, 355, 0, width=5, tags='sec')  
 
     def _create_text(self):
-        self.time_label = tk.Label(self.master, text='{}: 00:00:00'.format(self.label), font=('Arial', 50))
+        self.time_label = tk.Label(self.master, text='{}: 00:00:00'.format(self.label), font=('Arial', 20))
         self.time_label.pack()
 
     def _create_toggle_canvas(self):
@@ -189,7 +190,7 @@ class OptionsFrame(tk.Frame):
         num_bits_label = tk.Label(self, text='Number of Bits')
         num_bits_label.grid(row=1, column=2)
 
-        self.num_bits_entry = tk.OptionMenu(self, self.num_bits, '6', '7', '8')
+        self.num_bits_entry = tk.OptionMenu(self, self.num_bits, '7', '8')
         self.num_bits_entry.grid(row=1, column=3)
 
         parity_label = tk.Label(self, text='Parity')
@@ -273,26 +274,32 @@ class Application(tk.Frame):
         self.init_frames(ren_temperature, rtc_temperature, time, overheat_time, normal_time, time_overheated)
 
     def init_frames(self, ren_temperature, rtc_temperature, time, overheat_time, normal_time, time_overheated):
-        self.themometer_frame = ThermometerFrame(ren_temperature, self)
+        
+        self.themometer_frame = ThermometerFrame(ren_temperature, 'Renesas', self)
         self.themometer_frame.pack(side=tk.LEFT)
         
+        self.rtc_themometer_frame = ThermometerFrame(rtc_temperature, 'RTC', self)
+        self.rtc_themometer_frame.pack(side=tk.LEFT)
+        
         self.ren_temperature_frame = TemperatureFrame(ren_temperature, 'Renesas', self, flash=True)
-        self.ren_temperature_frame.pack(fill=tk.BOTH)
+        self.ren_temperature_frame.pack()
 
         self.rtc_temperature_frame = TemperatureFrame(rtc_temperature, 'RTC', self)
-        self.rtc_temperature_frame.pack(fill=tk.BOTH)
+        self.rtc_temperature_frame.pack()
 
         self.time_frame = TimeFrame(time, 'Clock', self, toggeling=True)
-        self.time_frame.pack(fill=tk.BOTH)
+        self.time_frame.pack()
 
         self.overheat_time_frame = TimeFrame(overheat_time, 'Last Time Overheat', self)
-        self.overheat_time_frame.pack(fill=tk.BOTH)
+        self.overheat_time_frame.pack()
 
         self.last_normal_time_frame = TimeFrame(normal_time, 'Last Time Normal', self)
-        self.last_normal_time_frame.pack(fill=tk.BOTH)
+        self.last_normal_time_frame.pack()
 
         self.time_overheated_frame = TimeFrame(time_overheated, 'Time Overheated', self)
-        self.time_overheated_frame.pack(fill=tk.BOTH)
+        self.time_overheated_frame.pack()
+
+        
 
 
         self.options_frame = OptionsFrame(self)
